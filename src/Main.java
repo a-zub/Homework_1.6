@@ -3,6 +3,8 @@
 // 2022/08/06
 
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] arg) {
         generateRandomArray();
@@ -21,7 +23,6 @@ public class Main {
 //Ваш коллега по отделу написал код, который генерирует массив из 30 случайных чисел, и предложил прежде,
 // чем писать программу для настоящей бухгалтерской книги, проверить всё на случайных числах от 100 000 до 200 000.
 
-    int[] arr = generateRandomArray();
 
     public static int[] generateRandomArray() {
         java.util.Random random = new java.util.Random();
@@ -68,13 +69,14 @@ public class Main {
         int maxPayment = 0;
         int minPayment = arrPayments[0];
         for (int i = 0; i < arrPayments.length - 1; i++) {
-            int current = arrPayments[i + 1];
-            if (current > maxPayment) {
-                maxPayment = current;
-            } else if (current < minPayment) {
-                maxPayment = current;
+            if (arrPayments[i + 1] > maxPayment) {
+                maxPayment = arrPayments[i + 1];
+            } else if (arrPayments[i] < minPayment) {
+                minPayment = arrPayments[i];
             }
         }
+        Arrays.sort(arrPayments);
+        System.out.print("Выплаты за все дни месяца составили: " + Arrays.toString(arrPayments) +"\n");
         System.out.printf("Минимальная сумма трат за день составила %d рублей\n", minPayment);
         System.out.printf("Максимальная сумма трат за день составила %d рублей\n", maxPayment);
     }
@@ -95,7 +97,7 @@ public class Main {
         for (int arrPayment : arrPayments) {
             allPayments += arrPayment;
         }
-        double averagePayments = allPayments / 30.0;
+        double averagePayments = (double)allPayments / arrPayments.length;
         System.out.println("Средняя сумма трат за месяц составила " + averagePayments + " рублей");
     }
 
@@ -120,7 +122,6 @@ public class Main {
         for (int i = reverseFullName.length - 1; i >= 0; i--) {
             System.out.print(reverseFullName[i]);
         }
-        System.out.println();
     }
 }
 
